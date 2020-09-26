@@ -167,7 +167,7 @@ html, body {
     }
   }
 
-  @media (max-width: 426px) {
+  @media (max-width: 760px) {
     .left {
       padding: 15% 1%;
       width: 100%;
@@ -183,7 +183,11 @@ html, body {
     }
 
     .row {
+      &__right {
+        width: 100%;
+      }
       &__left {
+        margin-right: 0;
         width: 100%;
         &--number, &--businesses {
           width: 80%;
