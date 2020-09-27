@@ -56,15 +56,80 @@ html, body {
 }
 
 * {
+  box-sizing: border-box;
   font-family: Gotham Pro, sans-serif;
   margin: 0;
   padding: 0;
+}
+
+@keyframes textAnimationUp {
+  0% {
+    transform: translateY(-1000px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-60px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes textAnimationLeft {
+  0% {
+    transform: translateX(-1000px);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(-60px);
+  }
+  60% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes textAnimationRight {
+  0% {
+    transform: translateX(1000px);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(60px);
+  }
+  60% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
   #app {
     width: 100%;
     height: 100%;
     display: flex;
   }
+
   .left {
     max-width: 1980px;
     width: 61%;
@@ -75,6 +140,7 @@ html, body {
       font-size: 55px;
       margin-bottom: 20px;
       letter-spacing: -0.05em;
+      animation: textAnimationUp 2s;
     }
 
     &__row {
@@ -99,18 +165,23 @@ html, body {
       }
     }
     &__left--number {
+      animation: textAnimationLeft 2s;
       font-size: 60px;
       margin-bottom: -5px;
     }
     &__left--businesses {
+      animation: textAnimationLeft 2s;
       font-size: 30px;
     }
 
-    &__right--text {
+    &__right {
+      animation: textAnimationRight 2s;
+      &--text {
       font-size: 25px;
       &-small {
         margin-top: 15px;
         font-size: 15px;
+      }
       }
     }
   }
@@ -130,7 +201,7 @@ html, body {
   }
   @media (max-width: 1025px) {
     .left {
-      padding: 15% 6% 15% 2%;
+      padding: 10% 6% 15% 2%;
     }
     .image__iphone {
     width: 200px;

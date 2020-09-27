@@ -1,9 +1,9 @@
 <template>
   <form class="form">
     <div class="form__row">
-      <input class="form__input" type="text" placeholder="Название компании" v-model="company">
-      <input class="form__input" type="text" placeholder="Email" v-model="email">
-      <input class="form__input" type="number" placeholder="Телефон" v-model="number">
+      <input :class="{ error: isError }" class="form__input" type="text" placeholder="Название компании" v-model="company">
+      <input :class="{ error: isError }" class="form__input" type="text" placeholder="Email" v-model="email">
+      <input :class="{ error: isError }" class="form__input" type="number" placeholder="Телефон" v-model="number">
     </div>
     <input class="form__button" type="button" value="Попробовать бесплатно"
       @click="handleClick">
@@ -16,14 +16,15 @@ export default {
     return {
       company: '',
       email: '',
-      number: '380'
+      number: '380',
+      isError: false
     }
   },
   methods: {
     handleClick () {
-      let error = false
+      this.isError = false
       if (this.company === '' || this.email === '' || this.number === '') {
-        error = true
+        this.isError = true
       }
 
       this.company = this.stringEdit(this.company)
@@ -36,22 +37,23 @@ export default {
         const dotpos = this.email.slice(atpos + 1).indexOf('.')
         if (dotpos > 0) {
           if (dotpos === this.email.slice(atpos + 1).length - 1) {
-            error = true
+            this.isError = true
           }
         } else {
-          error = true
+          this.isError = true
         }
       } else {
-        error = true
+        this.isError = true
       }
 
       if (this.number.toString(2).length !== 12 && this.number.toString(2).length !== 10) {
-        error = true
+        this.isError = true
       }
 
-      if (error) {
+      if (this.isError) {
         alert('Input correct data')
       } else {
+        this.isError = false
         alert(`company is ${this.company} email is ${this.email} number is ${this.number}`)
         this.company = ''
         this.email = ''
@@ -74,6 +76,10 @@ export default {
     border: none;
     border-radius: 5px;
     outline: none;
+
+    &:hover, &:focus {
+      border: 1px solid #6FA9BB;
+    }
   }
 
   &__row {
@@ -83,12 +89,32 @@ export default {
   }
 
   &__button {
+    outline: none;
+    cursor: pointer;
     width: 331px;
     height: 55px;
     border: none;
     border-radius: 5px;
     color: #fff;
     background-color: #000;
+
+    &:hover {
+      animation: pulse 1s;
+      box-shadow: 0 0 0 2em rgba(#000,0);
+    }
+
   }
+}
+
+.error {
+  border: 1px solid #ff0000;
+
+  &:hover, &:focus {
+    border: 1px solid #ff0000;
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 #000; }
 }
 </style>

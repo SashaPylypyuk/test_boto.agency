@@ -29,6 +29,11 @@ export default {
     position: absolute;
     top: 15%;
     left: -17%;
+    transition: transform .8s ease-in-out;
+
+    &:hover {
+      transform: rotate(360deg);
+    }
   }
 
   .image__ipad {
